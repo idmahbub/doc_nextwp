@@ -1,0 +1,5 @@
+{
+  "system": "Install System Requirement",
+  "env": "Setup NextWp",
+  "finish": "Manage services & Summary"
+}
