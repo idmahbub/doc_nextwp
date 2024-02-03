@@ -1,0 +1,108 @@
+## Update and install system requirement
+Open terminal and login as root, then execute command below:
+```bash filename="root@ubuntu-22.04#" copy
+sudo apt update
+sudo apt upgrade -y
+sudo apt install nginx zip curl -y
+
+sudo curl -o- https://raw.githubusercontent.com/idmahbub/doc_nextwp/master/public/installnode.sh | bash
+source ~/.bashrc
+
+nvm install 20
+corepack enable
+corepack prepare yarn@stable --activate
+npm install pm2 -g
+
+```
+
+## Setup nginx
+Open your wordpress nginx configuration file, and replace with config below:
+
+```sh filename="/etc/nginx/site-availabe/yourdomain.com" {2,6,7,10,11} copy
+upstream php {
+        server unix:/var/run/php/php8.0-fpm.sock;
+}
+server {
+        client_max_body_size 100M;
+        root /var/www/nextwp;
+        server_name yourdomain.com;
+
+        listen 443 ssl;
+        ssl_certificate /etc/letsencrypt/live/yourdomain.com/fullchain.pem;
+        ssl_certificate_key /etc/letsencrypt/live/yourdomain.com/privkey.pem;
+        ssl_dhparam /etc/ssl/certs/dhparam.pem;
+
+        location = /favicon.ico {
+                log_not_found off;
+                access_log off;
+        }
+        location = /robots.txt {
+                allow all;
+                log_not_found off;
+                access_log off;
+        }
+        rewrite ^/(.*)/$ /$1 permanent;
+        location / {
+            proxy_pass http://localhost:3000;
+            proxy_http_version 1.1;
+            proxy_read_timeout     60;
+            proxy_connect_timeout  60;
+            proxy_redirect         off;
+
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection "upgrade";
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+            proxy_set_header X-Forwarded-Host $host;
+            proxy_set_header X-Forwarded-Port $server_port;
+        }
+
+        location /wp-admin {
+            try_files $uri $uri/ /index.php?$args;
+        }
+
+        location /wp-includes {
+            try_files $uri $uri/ /index.php?$args;
+        }
+
+        location /wp-json {
+            try_files $uri $uri/ /index.php?$args;
+        }
+
+        location /wp-content {
+            try_files $uri $uri/ /index.php?$args;
+        }
+
+        location /graphql {
+            try_files $uri $uri/ /index.php?$args;
+        }
+
+        location ~ \.php$ {
+                include snippets/fastcgi-php.conf;
+                fastcgi_intercept_errors on;
+                fastcgi_pass php;
+        }
+        location /_next/static {
+            add_header Cache-Control "public, max-age=3600, immutable";
+            proxy_pass http://127.0.0.1:3000/_next/static;
+        }
+        location ~ /\.ht {
+                deny all;
+        }
+
+
+}
+
+```
+### Noted
+- Php version is `8.0`
+- Wordpress directory `/var/www/nextwp`
+- Domain name `yourdomain.com`
+
+### Verify and reload nginx config
+```sh filename="root@ubuntu-22.04#" copy
+nginx -t
+nginx -s reload
+```

@@ -1,0 +1,37 @@
+## Before deploying, maybe You needs :
+
+import { Steps } from 'nextra/components'
+
+<Steps>
+
+### Google CSE Id
+How to create Programmable Search Engine ID [here](https://support.google.com/programmable-search/answer/12499034?hl=en),
+and get your search engine id.
+![Programmable Search Engine ID](/gcs.png)
+Copy Id to [env.local](/nextwp/deploy/env#create--edit-env-file) file as `GOOGLE_CSE`.
+
+### Google adsense code (Pub id & Unit Id)
+
+
+
+```js filename="Ad-unit-code Example"
+
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1234567890"
+     data-ad-slot="unit-12345678990"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+```
+
+As the ad code sample above, so your `PUBLIC_GOOGLE_ADS_CLIENT_ID` is `ca-pub-1234567890`, and your `ADS_SLOT_1...5` is `unit-12345678990` for [env.local](/nextwp/deploy/env#create--edit-env-file) file.
+</Steps>
+
+## Deployment model
+
+**Conventional Deployment** uses a deployment model using tools such as ftp upload, sftp, ssh remote etc.
+**Modern Deployment** is a deployment model using git repository

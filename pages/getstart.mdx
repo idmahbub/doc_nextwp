@@ -27,7 +27,7 @@ yarn 4.0.2+
 
 </Steps>
 
-## Software Requirement
+## 3Rd Software / Plugin Requirement
 Nextwp requires several WordPress plugins that must be installed and have active status, You can download and install it right now, these plugins are:
 
 import { Steps } from 'nextra/components'
@@ -35,17 +35,22 @@ import { Steps } from 'nextra/components'
 <Steps>
 ### [WPGraphQL](https://wordpress.org/plugins/wp-graphql) 1.14.0+
  
-WPGraphQL is a free, open-source WordPress plugin that provides an extendable GraphQL schema and API for any WordPress site..
- 
+WPGraphQL is a free, open-source WordPress plugin that provides an extendable GraphQL schema and API for any WordPress site.
+Make sure you enable graphql access restrictions, for security reasons, by checking the `Limit the execution of GraphQL operations to authenticated requests. Non-authenticated requests to the GraphQL endpoint will not execute and will return an error.` option
+![limit graphql](/limitgraphql.png)
+
 ### [Rank Math](https://wordpress.org/plugins/seo-by-rank-math/) 1.0.201+
  
 Rank Math is a Search Engine Optimization plugin for WordPress that makes it easy for anyone to optimize their content with built-in suggestions based on widely-accepted best practices. Easily customize important SEO settings, control which pages are indexable, and how you want your website to appear in search with Structured data.
 
-### [WPGraphQL for Rank Math SEO](https://github.com/AxeWP/wp-graphql-rank-math/archive/refs/tags/0.0.16.zip)
+Make sure, rankmath breadcrumb have enabled
+![breadcrumb](/breadcrumb.png)
+
+### [WPGraphQL for Rank Math SEO](/wp-graphql-rank-math.zip)
 
 Adds WPGraphQL support for Rank Math SEO. Built with WPGraphQL Plugin Boilerplate.
 
-### [WPGraphQL JWT Authentication](https://github.com/wp-graphql/wp-graphql-jwt-authentication/archive/refs/tags/v0.7.0.zip)
+### [WPGraphQL JWT Authentication](/wp-graphql-jwt-authentication.zip)
 
 This plugin extends the WPGraphQL plugin to provide authentication using JWT (JSON Web Tokens)
 

@@ -1,0 +1,14 @@
+# Another Page
+
+
+## Install depedency & run Nextwp
+Open terminal and then run:
+```bash filename="root@ubuntu-22.04:/home/nextwp#" copy
+yarn
+yarn deploy:prod
+pm2 startup
+pm2 save
+```
+### Noted
+- `pm2 startup` To automatically generate and configuration a startup script just type the command (without sudo)
+- `pm2 save` Once you have started all desired apps, save the app list so it will respawn after reboot

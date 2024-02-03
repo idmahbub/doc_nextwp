@@ -1,8 +1,8 @@
 {
   "index": "Introduction",
   "getstart": "Get Started",
-  "wpsetup":"Wordpress Setup",
-  "nextwp":"NextWp Install",
+  "wpsetup":"Wordpress NextWp",
+  "nextwpvps":"NextWp On Vps",
   "about": {
     "title": "About",
     "type": "page"
@@ -11,6 +11,12 @@
     "title": "Contact ↗",
     "type": "page",
     "href": "https://twitter.com/idmahbub",
+    "newWindow": true
+  },
+  "bugissue": {
+    "title": "Bug & Issue ↗",
+    "type": "page",
+    "href": "https://github.com/idmahbub/doc_nextwp/issues",
     "newWindow": true
   }
 }
