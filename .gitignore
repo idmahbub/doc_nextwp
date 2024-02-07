@@ -1,2 +1,5 @@
 .next
 node_modules
+.evanto
+# local env files
+*env*.local
